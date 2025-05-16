@@ -7,10 +7,12 @@ def mostrar_menu():
     print("1. Cadastrar produto não alimenticio")
     print("2. Cadastrar produto alimenticio")
     print("3. Listar produtos em estoque")
-    print("4. Sair ")
+    print("4. Repor estoque de produto")
+    print("5. Venda de produto")
+    print("6. Sair ")
 mostrar_menu()
 opcao = input("Qual opção você ira escolher: ")
-while opcao !=4:
+while opcao !=6:
     if opcao == "1":
        nome = input("Informe o nome do produto que você quer cadastrar (informe um produto não alimenticio): ")
        quantidade = int(input("Informe a quantidade: "))
@@ -35,8 +37,25 @@ while opcao !=4:
     elif opcao == "3":
         for i in lista_Produto: 
             i.exibir_produtos()
-            
+
+
+
     elif opcao == "4":
+      repor_estoque = int(input("Quantas unidades você ira repor: "))
+
+      rep_estoq =  repor_estoque(repor_estoque)
+      lista_Produto.append(rep_estoq) 
+
+
+  
+
+
+
+
+
+
+            
+    elif opcao == "6":
         print("saindo....")
         break
     
