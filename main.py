@@ -1,66 +1,74 @@
 from Produto import Produto
-from ProdutoAlimenticio import ProdutoAlimeticio
+from ProdutoAlimenticio import ProdutoAlimenticio
 
 lista_Produto = []
+
 def mostrar_menu():
     print("\n ==== Menu ====\n")
-    print("1. Cadastrar produto não alimenticio")
-    print("2. Cadastrar produto alimenticio")
+    print("1. Cadastrar produto não alimentício")
+    print("2. Cadastrar produto alimentício")
     print("3. Listar produtos em estoque")
     print("4. Repor estoque de produto")
     print("5. Venda de produto")
-    print("6. Sair ")
-mostrar_menu()
-opcao = input("Qual opção você ira escolher: ")
-while opcao !=6:
+    print("6. Sair")
+
+while True:
+    mostrar_menu()
+    opcao = input("Qual opção você irá escolher: ")
+
     if opcao == "1":
-       nome = input("Informe o nome do produto que você quer cadastrar (informe um produto não alimenticio): ")
-       quantidade = int(input("Informe a quantidade: "))
-       preco = float(input("Informe o preço: "))
-      
-       produto = Produto(nome, quantidade, preco)
-       lista_Produto.append(produto)
-       print(f"Foi cadastrado o produto: {nome} | Sua quantidade é: {quantidade} | Preço: {preco} ")
-       
-       
+        nome = input("Nome do produto (não alimentício): ")
+        quantidade = int(input("Quantidade: "))
+        preco = float(input("Preço: "))
+        produto = Produto(nome, quantidade, preco)
+        lista_Produto.append(produto)
+        print("Produto cadastrado com sucesso!")
+
     elif opcao == "2":
-       nome = input("Informe o nome do produto que você quer cadastrar: ")
-       quantidade = int(input("Informe a quantidade: "))
-       preco = float(input("Informe o preço: "))
-       data_validade = input("Informe a data de validade: ")
-      
-       produto_alimenticio = ProdutoAlimeticio(nome, quantidade, preco, data_validade)
-       lista_Produto.append(produto_alimenticio)
-       print(f"Foi cadastrado o produto: {nome} | Sua quantidade é: {quantidade} | Preço: {preco} | Data de validade: {data_validade}")
-    
-    
+        nome = input("Nome do produto alimentício: ")
+        quantidade = int(input("Quantidade: "))
+        preco = float(input("Preço: "))
+        data_validade = input("Data de validade: ")
+        produto = ProdutoAlimenticio(nome, quantidade, preco, data_validade)
+        lista_Produto.append(produto)
+        print("Produto alimentício cadastrado com sucesso!")
+
     elif opcao == "3":
-        for i in lista_Produto: 
-            i.exibir_produtos()
-
-
+        for produto in lista_Produto:
+            produto.exibir_produto()
 
     elif opcao == "4":
-      repor_estoque = int(input("Quantas unidades você ira repor: "))
+        nome = input("Informe o nome do produto para repor o estoque: ")
+        encontrado = False
+        for produto in lista_Produto:
+            if produto.nome == nome:
+                quantidade = int(input("Informe a quantidade a ser adicionada: "))
+                produto.repor_estoque(quantidade)
+                encontrado = True
+                break
+        if not encontrado:
+            print("Produto não encontrado.")
 
-      rep_estoq =  repor_estoque(repor_estoque)
-      lista_Produto.append(rep_estoq) 
 
+    elif opcao == "5":
+        nome = input("Informe o nome do produto que deseja vender: ")
+        encontrado = False
+        for produto in lista_Produto:
+            if produto.nome == nome:
+                quantidade = int(input("Informe a quantidade a ser vendida: "))
+                produto.vender(quantidade)
+                encontrado = True
+                break
+        if not encontrado:
+            print("Produto não encontrado.")
 
-  
-
-
-
-
-
-
-            
     elif opcao == "6":
-        print("saindo....")
+        print("Saindo...")
         break
-    
+
     else:
-        print("Opcão invalida")
+        print("Opção inválida. Tente novamente.")
+
         
 
     
